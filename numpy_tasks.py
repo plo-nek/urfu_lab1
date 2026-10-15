@@ -139,6 +139,7 @@ def one_hot(data: OneHotInput) -> np.ndarray:
     result[np.arange(labels.size), labels] = 1
     return result
 
+#1
 mats = np.array([[[1, 0], [0, 1]], [[2, 0], [0, 2]]])
 vecs = np.array([[[1], [1]], [[1], [1]]])
 res = sum_prod(MatrixVectorBatchInput(mats, vecs))
@@ -148,18 +149,21 @@ mats1 = np.array([[[1, 2], [3, 4]]])
 vecs1 = np.array([[[1], [1]]])
 print(sum_prod(MatrixVectorBatchInput(mats1, vecs1)).ravel().tolist(), "== [3, 7]")
 
+#2
 m = np.array([[1, 5], [7, 2]])
 b = binarize(BinarizeInput(m, 4))
 print(b.tolist(), "== [[0, 1], [1, 0]]")
 print("исходная не изменилась:", m.tolist(), "== [[1, 5], [7, 2]]")
 print(binarize(BinarizeInput(np.array([[0, 0], [0, 0]]), 0)).tolist(), "== [[0, 0], [0, 0]]")
 
+#3
 m = np.array([[3, 1, 3, 2], [5, 5, 5, 5]])
 print(unique_rows(MatrixInput(m)), "== [[1, 2, 3], [5]]")
 print(unique_columns(MatrixInput(m)), "== [[3, 5], [1, 5], [3, 5], [2, 5]]")
 m2 = np.array([[1.5, 1.5, 2.5]])
 print(unique_rows(MatrixInput(m2)), "== [[1.5, 2.5]]")
 
+#4
 stat = matrix_statistics(RandomMatrixInput(rows=3, columns=4, mean=0, std=1, seed=42))
 print("shape:", stat.matrix.shape, "== (3, 4)")
 print("row_means:", stat.row_means.shape, "== (3,)")
@@ -167,6 +171,7 @@ print("column_means:", stat.column_means.shape, "== (4,)")
 stat2 = matrix_statistics(RandomMatrixInput(rows=3, columns=4, mean=0, std=1, seed=42))
 print("воспроизводимость:", np.allclose(stat.matrix, stat2.matrix), "== True")
 
+#5
 c = chess(ChessInput(rows=3, columns=4, first=0, second=1))
 print(c.tolist())
 print("== [[0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 1]]")
@@ -175,6 +180,7 @@ print(c2.tolist(), "== [[5]]")
 c3 = chess(ChessInput(rows=2, columns=2, first=7, second=3))
 print(c3.tolist(), "== [[7, 3], [3, 7]]")
 
+#6
 img = draw_rectangle(RectangleInput(
     width=2, height=2, image_height=5, image_width=5,
     shape_color=(255, 0, 0), background_color=(0, 0, 0),
@@ -191,6 +197,7 @@ print("shape:", img.shape, "== (5, 5, 3)")
 print("центр:", img[2, 2].tolist(), "== [0, 255, 0]")
 print("угол:", img[0, 0].tolist(), "== [0, 0, 0]")
 
+#7
 ts = analyze_time_series(TimeSeriesInput(values=[1, 3, 2, 5, 4, 6, 0], window=3))
 print("mean:", ts.mean, "== 3.0")
 print("variance:", round(ts.variance, 4))
@@ -199,6 +206,7 @@ print("local_maxima_indices:", ts.local_maxima_indices, "== [1, 3, 5]")
 print("local_minima_indices:", ts.local_minima_indices, "== [2, 4]")
 print("moving_average:", np.round(ts.moving_average, 4).tolist(),"== [2.0, 3.3333, 3.6667, 5.0, 3.3333]")
 
+#8
 oh = one_hot(OneHotInput(labels=[0, 2, 3, 0], class_count=None))
 print(oh.tolist())
 print("== [[1,0,0,0],[0,0,1,0],[0,0,0,1],[1,0,0,0]]")

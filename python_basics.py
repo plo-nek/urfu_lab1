@@ -79,7 +79,6 @@ def is_balanced_number(data: PositiveIntegerInput) -> bool:
     length = len(digits)
 
     if length % 2 == 0:
-        # две средние цифры исключаются
         mid = length // 2
         left = digits[:mid - 1]
         right = digits[mid + 1:]
